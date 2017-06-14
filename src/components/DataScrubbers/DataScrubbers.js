@@ -1,5 +1,12 @@
 export default class DataScrubbers {
 
+  secureWebsite(unsecureUrl) {
+    let secure = unsecureUrl.substr(0, 4) + 's'
+    let path = unsecureUrl.substr(4)
+    let securePath = secure + path
+    return securePath
+  }
+
   scrubQuotes(data) {
     let quotes = data.results.reduce((acc, val) => {
       acc.push(val.opening_crawl)
@@ -11,29 +18,23 @@ export default class DataScrubbers {
 
   scrubPeople(data) {
     return data.results.reduce((acc, val) => {
-      if(!acc[val.name]) {
-
         acc[val.name] = {}
         acc[val.name].name = val.name
         acc[val.name].type = 'people'
 
-        fetch(val.homeworld)
+        fetch(this.secureWebsite(val.homeworld))
         .then((resp) => resp.json())
         .then((data) => {
           acc[val.name].homeworld=data.name
           acc[val.name].population=data.population
-          return
         })
 
-        fetch(val.species[0])
+        fetch(this.secureWebsite(val.species[0]))
         .then((resp) => resp.json())
         .then((data) => {
-
           acc[val.name].species=data.name
           acc[val.name].language=data.language
-          return
         })
-      }
       return acc
     }, {})
   }
@@ -50,11 +51,10 @@ export default class DataScrubbers {
             acc[val.name].residents = []
 
             val.residents.forEach((resident, i) => {
-              fetch(resident)
+              fetch(this.secureWebsite(resident))
               .then((resp) => resp.json())
               .then((data) => {
                   acc[val.name].residents.push(data.name)
-                return
               })
             })
           }
