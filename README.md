@@ -2,6 +2,8 @@
 ## Project Status
 SWAPI - Star Wars API project has complete functionality and has been designed to be almost annoyingly Star Warsy! I intend to expand SWAPI’s usability by pulling in the remaining characters, planets, and vehicles vs the single pages currently being demonstrated.
 
+View it [here](https://swapi-dave-hubertus.herokuapp.com/)
+
 ## Project Screen Shot(s) 
 <img width="1272" alt="star-wars copy" src="https://user-images.githubusercontent.com/25044263/27403160-abadcbc4-5686-11e7-9a25-9abc9db33e9f.png">
 
